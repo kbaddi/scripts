@@ -4,20 +4,19 @@ This is doc String
 
 """
 
-print("This is test")
-arg = input("ENter a string : ")
+arg = input("Enter a string : ")
 arg.lower()
-l = len(arg) -1
-sarg = []
-def decipher(arg):
-    for let in arg:
-        if let == 'z'
-            neword.append(char(97 + 2)
-        else:
-            neword.append(chr(ord(let)+2)
-    print(neword)
-decipher(arg)
+neword = []
+for letter in arg:
+    if letter = 'z'
+
+    neword.append(chr(ord(letter)-3))
+neword = "".join(neword)
+
+print(neword)
+
 
 
 # To be continued
+
 
