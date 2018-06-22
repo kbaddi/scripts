@@ -21,16 +21,23 @@ elif [ -f /etc/debian_version ] ; then
 	VER=$(cat /etc/debian_version)
 
 elif [ -f /etc/redhat-release ]; then
-	OS=$OS  # Dumy Values need to be updated 
-	VER=$VER  # Dumy Values need to be updated
-
+	OS=$(cat /etc/redhat-release)   
+	VER=$VER  
 else
 	OS=$(uname -s)
 	VER=$(uname -r)
 
 fi
 
-echo -e "The machine's Operating System is ${OS} "
-echo -e "Version is $VER"
+echo -e "The machine's Operating System is ${OS} " >> ./setuplog.txt
+echo -e "Version is $VER" >> ./setuplog.txt
+
+if [[ $OS == "Debian*" || $OS == "Ubuntu" ]];
+then
+	sudo apt update -y && sudo apt upgrade -y
+	sudo apt install git -y
+	sudo sh ./installdocker.sh
+fi
+
 
 
