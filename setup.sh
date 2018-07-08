@@ -32,12 +32,24 @@ fi
 echo -e "The machine's Operating System is ${OS} " >> ./setuplog.txt
 echo -e "Version is $VER" >> ./setuplog.txt
 
-if [[ $OS == "Debian*" || $OS == "Ubuntu" ]];
+
+if [[ $OS == *"Red"* ]];
+then
+    echo "Redhat Distribution"
+    sudo yum upgrade -y
+    sudo yum install git -y
+    sudo yum install vim -y
+    sudo sh ./dockerinstall_rhel.sh		
+
+elif [[ $OS == "Debian*" || $OS == "Ubuntu" ]];
 then
 	sudo apt update -y && sudo apt upgrade -y
 	sudo apt install git -y
-	sudo sh ./installdocker.sh
+	sudo sh ./dockerinstall_deb.sh
+
+else
+	echo "Unknown Distribution "
 fi
 
-
+fi
 
