@@ -32,8 +32,12 @@ fi
 echo -e "The machine's Operating System is ${OS} " >> ./setuplog.txt
 echo -e "Version is $VER" >> ./setuplog.txt
 
+echo "$HOSTNAME"
+echo "$OS"
+echo "$VER"
 
-if [[ $OS == *"Red"* ]];
+
+if [[ $OS == *"Red"* || $OS == "CentOs" ]];
 then
     echo "Redhat Distribution"
     sudo yum upgrade -y
@@ -51,5 +55,5 @@ else
 	echo "Unknown Distribution "
 fi
 
-fi
+
 
