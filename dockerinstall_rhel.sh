@@ -1,8 +1,13 @@
 # script is to install Docker on rpm (Fedora) based systesm
 
-# Uninstall existing docker
 
-sudo yum remove docker \
+if [[ -n `sudo rpm -qa | grep -i 'docker'` ]];
+then
+
+        echo "Docker Found uninstalling"
+
+        # Uninstall existing docker
+        sudo yum remove docker \
                   docker-client \
                   docker-client-latest \
                   docker-common \
@@ -14,19 +19,34 @@ sudo yum remove docker \
                   docker-engine
 
 
+
+
+
+
+else
+        echo " Docker not found "
+
+fi
+
 # Install required packages
 
 sudo yum install -y yum-utils \
                   device-mapper-persistent-data \
                   lvm2
- echo "Installed required Utils"
- # Set up Stable Repo
+echo "Installed required Utils"
+# Set up Stable Repo
  sudo yum-config-manager \
                   --add-repo \
                   https://download.docker.com/linux/centos/docker-ce.repo
- 
- # Install Docker CE
- if sudo yum install docker-ce
+
+
+#Install Container-selinux package
+
+# yum install -y http://mirror.centos.org/centos/7/extras/x86_64/Packages/container-selinux-2.9*.el7.noarch.rpm
+
+
+# Install Docker CE
+if sudo yum install docker-ce
 then
        echo "Docker CE Installed"
        # Start Docker service
